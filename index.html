@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+    <style>
+        .color-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 7px;
+            display: inline-block;
+        }
+
+        .clic {
+            cursor: pointer;
+        }
+
+        .quantity button {
+            border-radius: 50%;
+            display: inline-block;
+            width: 30px;
+        }
+
+        .quantity div {
+            text-align: center;
+            min-width: 30px;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        .buy-box {
+            margin: 20px;
+        }
+
+        footer {
+
+            text-align: center;
+            padding: 30px 10px;
+            margin-top: 50px;
+            min-height: 100px;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .producto-relacionado-precio {
+            background: orangered;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="app">
+    <nav class="navbar navbar-expand-lg " :style="'background-color: '+configuracionPagina.menuColor">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">{{configuracionPagina.marca}} </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#"><li v-for="menu in menus">{{configuracionPagina.menu.etiqueta2}} </li></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><li v-for="menu in menus">{{configuracionPagina.menu.etiqueta2}} </li></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="row">
+            <h3>{{producto.nombre}}</h3>
+        </div>
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 ">
+                <img src="https://e00-expansion.uecdn.es/assets/multimedia/imagenes/2020/05/07/15888481249988.jpg"
+                    alt="" width="100%">
+            </div>
+            <div class="col-12 col-sm-6  col-md-8">
+                <h6>{{producto.descripcion}}</h6>
+                <div class="p-3 mb-2 text-white" :style="'background-color: ' +configuracionPagina.precio_estilos">
+                    {{producto.precio}}
+                </div>
+                <h5>Color</h5>
+                <div>
+                    <div v-for="color of producto.colores" class="color-box clic" :style="'background: '+color" @click="seleccionarColor(color)"></div>
+
+                </div>
+                <h5>Cantidad</h5>
+                <div class="quantity">
+                    <button @click="decrementar()">-</button>
+                    
+                    <div>{{cantidad}}</div> <button @click="incrementar()">+</button>
+               
+                    
+                </div>
+                <div class="buy-box">
+                    <!-- <button type="button" class="btn btn-primary" v-if="seleccionarCantidad(cantidad)">Comprar</button> -->
+                    <button type="button" class="btn btn-primary">Comprar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container ">
+
+        <div class="row">
+            <h4>Productos relacionados</h4>
+        </div>
+        <div class="row">
+            <div class="col" >
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{productosRelacionados.nombre2}} KF102 </h5>
+                        <img src="https://ae01.alicdn.com/kf/S00eb0e55c14f47e2bbf828a92ecd5515U/S6S-Mini-GPS-Drones-150g-Drone-4K-Profesional-HD-Dual-Camera-5G-WIFI-FPV-Brushless-Folding.jpg_Q90.jpg_.webp"
+                            alt="" width="100%">
+                        <p class="card-text">{{productosRelacionados.descripcion2}} Dron plegable KF102 con Gps, 8K, cámara Dual HD, 2 ejes,cardán, Motor sin escobillas, fotografía aérea, 1200M de distancia, novedad de 2022.</p>
+            
+                            <div class="producto-relacionado-precio" :style="'background-color: orangered ' + productosRelacionados.precio2">
+                                Precio: 1800 BOB {{productosRelacionados.precio2}}
+                            </div>
+                        <div>
+                            <div>
+                                <!-- <div v-for="color of productosRelacionados.colores2" class="color-box clic" :style="'background: '+color" @click="seleccionarColor(colores2)"></div> -->
+                                <div class="color-box" style="background: orange"></div>
+                                <div class="color-box" style="background: blue"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{productosRelacionados.nombre3}} KBDFA-Dron E888 RC</h5>
+                        <img src="https://ae01.alicdn.com/kf/S00eb0e55c14f47e2bbf828a92ecd5515U/S6S-Mini-GPS-Drones-150g-Drone-4K-Profesional-HD-Dual-Camera-5G-WIFI-FPV-Brushless-Folding.jpg_Q90.jpg_.webp"
+                            alt="" width="100%">
+                        <p class="card-text">{{productosRelacionados.descripcion3}} KBDFA-Dron E888 RC, cuadricóptero profesional FPV, 4K HD,fotografía aérea, evitación de obstáculos, helicóptero, juguetes de distancia.</p>
+                        <div class="producto-relacionado-precio">Precio:154 BOB {{productosRelacionados.precio3}}</div>
+                        <div>
+                            <div>
+                                <!-- <div v-for="color of productosRelacionados.colores3" class="color-box clic" :style="'background: '+color" @click="seleccionarColor(colores3)"></div> -->
+                                <div class="color-box" style="background: black"></div>
+                                <div class="color-box" style="background: midnightblue"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{productosRelacionados.nombre4}}Dron Profesional 4K con GPS</h5>
+                        <img src="https://ae01.alicdn.com/kf/S00eb0e55c14f47e2bbf828a92ecd5515U/S6S-Mini-GPS-Drones-150g-Drone-4K-Profesional-HD-Dual-Camera-5G-WIFI-FPV-Brushless-Folding.jpg_Q90.jpg_.webp"
+                            alt="" width="100%">
+                        <p class="card-text">{{productosRelacionados.descripcion4}} Dron Profesional 4K con GPS, 8K, cámara HD, 3 ejes, cardánantivibración, evitación de obstáculos, fotografía aérea, Quadcopter, nuevo.</p>
+                        <div class="producto-relacionado-precio">{{productosRelacionados.precio4}} Precio:1800 BOB</div>
+                        <div>
+                            <div>
+                                <!-- <div v-for="color of productosRelacionados.colores4" class="color-box clic" :style="'background: '+color" @click="seleccionarColor(colores4)"></div> -->
+                                <div class="color-box" style="background: teal"></div>
+                                <div class="color-box" style="background: blue"></div>
+                                <div class="color-box" style="background: slategrey"></div>
+                                <div class="color-box" style="background: navy"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer :style="'background-color: '+configuracionPagina.footerColor">
+
+    </footer>
+</div>
+    <script type="module">
+        import { createApp, ref } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+        createApp({
+            data() {
+                return {
+                    colorSel:null,
+                    cantidad:0,
+                    configuracionPagina: {
+                        marca: "MegaDron",
+                        menuColor: "lightblue",
+                        footerColor: "slategrey",
+                        precio_estilos: "orangered",
+                        precioEstilos: "background: orangered; color: white; font-weight: bold",
+                        menus: [
+                            {
+                                etiqueta1: "Inicio",
+                                url: "?"
+                            },
+                            {
+                                etiqueta2: "Tienda",
+                                url: "?"
+                            }
+                        ]
+                    },
+                    producto: {
+                        id: 1,
+                        imagen:
+                            "https://cdn.shopify.com/s/files/1/0640/5067/files/pexels-photo-53903_large.jpg?v=1492718386",
+                        nombre: "Dron LU3 MAX GPS 8K HD",
+                        descripcion: "Dron LU3 MAX GPS 8K HD profesional con <b>cámara Dual</b>,cardán autoestabilizador, Motor sin escobillas para evitar obstáculos, cuadricóptero plegable",
+                        precio: "620 BOB",
+                        colores: ["red", "blue", "black", "yellow"]
+                    },
+                    productosRelacionados: [
+                        {
+                            id: 2,
+                            imagen:
+
+                                "https://cdn.shopify.com/s/files/1/0640/5067/files/pexels-photo-53903_large.jpg?v=1492718386",
+
+                            nombre2: "KF102",
+                            descripcion2: "Dron plegable KF102 con Gps, 8K, cámara Dual HD, 2 ejes,cardán, Motor sin escobillas, fotografía aérea, 1200M de distancia, novedad de 2022",
+
+                            precio2: "1180 BOB",
+                            colores2: ["orange", "blue"]
+                        },
+                        {
+                            id: 3,
+                            imagen: "https://m.media-amazon.com/images/I/61T16KqZtPL.jpg",
+                            nombre3: "KBDFA-Dron E888 RC",
+                            descripcion3: "KBDFA-Dron E888 RC, cuadricóptero profesional FPV, 4K HD,fotografía aérea, evitación de obstáculos, helicóptero, juguetes de distancia",
+
+                            precio3: "154 BOB",
+                            colores3: ["black", "midnightblue"]
+                        },
+                        {
+                            id: 4,
+                            imagen: "https://i.blogs.es/9e6591/dron/450_1000.jpg",
+                            nombre4: "Dron Profesional 4K con GPS",
+                            descripcion4: "Dron Profesional 4K con GPS, 8K, cámara HD, 3 ejes, cardánantivibración, evitación de obstáculos, fotografía aérea, Quadcopter, nuevo",
+
+                            precio4: "1800 BOB",
+                            colores: ["teal", "blue", "slategrey", "navy"]
+                        }
+                    ]
+                    ,pedido: {
+                        id: null, 
+                        cantidad: 1,
+                        color:null,
+                    }
+                }
+              
+                
+            },
+            methods: {
+                seleccionarColor(color){
+                    this.colorSel = color;
+                    alert("color seleccionado es: "+this.colorSel)
+                },
+                seleccionarCantidad(cantidad){
+                    this.cantidad = cantidad;
+                    if (cantidad != 0){
+                        alert("cantidad seleccionada es: "+this.cantidad)
+                    }
+                    else {
+                        alert("No realizo aun la seleccion ")
+                    }
+                    
+                },
+                incrementar(){
+                    this.cantidad = this.cantidad + 1;
+                },
+                decrementar(){
+                    this.cantidad = this.cantidad - 1;
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
